@@ -1,3 +1,4 @@
+// O(n log n log c)
 #include <iostream>
 #include <utility>
 #include <algorithm>
