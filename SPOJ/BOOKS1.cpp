@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <algorithm>
+
 using namespace std;
 typedef long long ll;
 const int MAXN = 500;
@@ -11,9 +12,12 @@ int n, k;
 bool ok(ll s) {
   ll t = 0;
   int cnt = 1;
-  for(int i = 0;i < n;i++) {
-    if(p[i] > s) { cnt = inf; break; }
-    if(t + p[i] > s) {
+  for (int i = 0; i < n; i++) {
+    if (p[i] > s) {
+      cnt = inf;
+      break;
+    }
+    if (t + p[i] > s) {
       cnt++;
       t = 0;
     }
@@ -22,41 +26,41 @@ bool ok(ll s) {
   return cnt <= k;
 }
 
-void print(int idx,ll s,int tk) {
+void print(int idx, ll s, int tk) {
   ll t = 0;
   int i;
-  for(i = idx;i >= 0;i--) {
-    if(t + p[i] > s || i+1 == tk-1) {
-      print(i,s,tk-1);
+  for (i = idx; i >= 0; i--) {
+    if (t + p[i] > s || i + 1 == tk - 1) {
+      print(i, s, tk - 1);
       break;
     }
     t += p[i];
   }
-  if(i >= 0) printf("/ ");
-  for(i++;i <= idx;i++) {
-    printf("%lld",p[i]);
-    if(i != n-1) printf(" ");
+  if (i >= 0) printf("/ ");
+  for (i++; i <= idx; i++) {
+    printf("%lld", p[i]);
+    if (i != n - 1) printf(" ");
   }
 }
 
 int main() {
   int tcase;
-  scanf("%d",&tcase);
-  while(tcase--) {
-    scanf("%d%d",&n,&k);
+  scanf("%d", &tcase);
+  while (tcase--) {
+    scanf("%d%d", &n, &k);
     ll s = 0;
-    for(int i = 0;i < n;i++) {
-      scanf("%lld",p+i);
+    for (int i = 0; i < n; i++) {
+      scanf("%lld", p + i);
       s += p[i];
     }
     ll l = 0, r = s;
     ll m;
-    while(l < r) {
-      m = (l+r)/2LL;
-      if(ok(m)) r = m;
-      else l = m+1;
+    while (l < r) {
+      m = (l + r) / 2LL;
+      if (ok(m)) r = m;
+      else l = m + 1;
     }
-    print(n-1,r,k);
+    print(n - 1, r, k);
     puts("");
   }
   return 0;
